@@ -1,0 +1,19 @@
+https://www.hackerrank.com/challenges/new-year-chaos/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=array
+Look at discussions
+
+void minimumBribes(vector<int> q) {
+    long n=q.size(),ans=0;
+    for(long i=n-1;i>=0;i--){
+        if(q[i]>i+3){
+            cout<<"Too chaotic"<<endl;
+            return;
+        }
+        for(long j=max(0,q[i]-2);j<i;j++){ //this loops is used to check that how many people jumped a certain person. Look at 12537864 example. In this 4 is jumped over by 5,7,8 and 6
+        //this can be concluded because, these numbers are bigger than 4 and comes between (one less than original position of 4) and (current position of 4).
+        //it can been seen that, a number(say y) jumping over another number(say x) can only go one place ahead of the x, without voilating the condition that only 2 bribes are allowed.
+        //so to find the number of people who could have jumped over x we have to run a loop from (x's original position-1) and (x's current position.)
+            if(q[j]>q[i])ans++;
+        }
+    }
+    cout<<ans<<endl;
+}
